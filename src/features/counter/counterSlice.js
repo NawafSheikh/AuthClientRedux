@@ -26,6 +26,4 @@ export const incrementAsync = amount => dispatch => {
   }, 1000);
 };
 
-export const selectCount = state => state.counter.value;
-
 export default counterSlice.reducer;

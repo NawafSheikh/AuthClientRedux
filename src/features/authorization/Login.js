@@ -3,11 +3,11 @@ import {Link, Redirect} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   loginAsync,
-  selectLoggedIn
+  login2Async
 } from './authorizationSlice';
 
 function Login () {
-  const loggedIn = useSelector(selectLoggedIn);
+  const loggedIn = useSelector(state => state.authorization.loggedIn);
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -32,6 +32,9 @@ function Login () {
             <br/>
             <button onClick={e => dispatch(loginAsync(name, password))}>
               Login
+            </button>
+            <button onClick={e => dispatch(login2Async())}>
+              Login Fb
             </button>
             <br/>
             <Link to="/Create" style={{fontSize:15}}>

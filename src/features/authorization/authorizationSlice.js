@@ -23,6 +23,15 @@ export const authSlice = createSlice({
   }
 })
 
+export const login2Async = () => dispatch => {
+  window.open("http://localhost:3000/auth/facebook", "_self");
+  /*axios.post('/auth/facebook').then(res => {
+    console.log('Success')
+  }).catch(err => {
+    console.log('Failure', err)
+  })*/
+}
+
 export const loginAsync = (name, password) => dispatch => {
   axios.post(`/users/login`, {name: name, password:password})
     .then(res => {
@@ -63,7 +72,5 @@ export const createAsync = (name, password) => dispatch => {
   })
 }
 
-export const selectLoggedIn = state => state.authorization.loggedIn;
-export const selectName = state => state.authorization.name;
 
 export default authSlice.reducer;

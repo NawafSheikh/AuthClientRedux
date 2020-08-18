@@ -4,8 +4,7 @@ import Login from './Login'
 import Create from './Create'
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  checkAsync,
-  selectLoggedIn
+  checkAsync
 } from './authorizationSlice';
 import {
   BrowserRouter as Router,
@@ -14,7 +13,7 @@ import {
 } from 'react-router-dom';
 
 function AuthIndex (){
-  const loggedIn = useSelector(selectLoggedIn);
+  const loggedIn = useSelector(state => state.authorization.loggedIn);
   const dispatch = useDispatch();
   console.log(loggedIn)
   if(loggedIn == null)

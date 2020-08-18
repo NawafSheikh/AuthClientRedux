@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import {Link, Redirect} from 'react-router-dom';
-import axios from '../../connection/axios'
+import {Redirect} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  createAsync,
-  selectLoggedIn
+  createAsync
 } from './authorizationSlice';
 
 function Create () {
-  const loggedIn = useSelector(selectLoggedIn);
+  const loggedIn = useSelector(state => state.authorization.loggedIn);
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');

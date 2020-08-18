@@ -2,12 +2,11 @@ import React from 'react';
 import Counter from '../counter/Counter'
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  infoAsync,
-  selectName
+  infoAsync
 } from './authorizationSlice';
 
 function Home (){
-  const name = useSelector(selectName);
+  const name = useSelector(state => state.authorization.name);
   const dispatch = useDispatch();
   if(name == null)
   {
