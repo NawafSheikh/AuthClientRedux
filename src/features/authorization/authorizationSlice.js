@@ -35,10 +35,12 @@ export const login2Async = () => dispatch => {
 export const loginAsync = (name, password) => dispatch => {
   axios.post(`/users/login`, {name: name, password:password})
     .then(res => {
-      console.log(2)
-      sessionStorage.setItem('authToken', res.data.accessToken);
-      axios.defaults.headers.common = {'Authorization': `bearer ${sessionStorage.getItem('authToken')}`}
-      dispatch(authSlice.actions.login());
+      if(res.data !== 'Password Wrong')
+      {
+        sessionStorage.setItem('authToken', res.data.accessToken);
+        axios.defaults.headers.common = {'Authorization': `bearer ${sessionStorage.getItem('authToken')}`}
+        dispatch(authSlice.actions.login());
+      }
     }).catch(err => {
       console.log(err)
       dispatch(authSlice.actions.logoff());
@@ -57,7 +59,7 @@ export const checkAsync = () => dispatch => {
 
 export const infoAsync = () => dispatch => {
   axios.get('/users/info').then(res => {
-    dispatch(authSlice.actions.info(res.data[0].name))
+    dispatch(authSlice.actions.info(res.data.name))
   }).catch(err => {
     console.log(err)
     dispatch(authSlice.actions.info(''))

@@ -15,7 +15,6 @@ import {
 function AuthIndex (){
   const loggedIn = useSelector(state => state.authorization.loggedIn);
   const dispatch = useDispatch();
-  console.log(loggedIn)
   if(loggedIn == null)
   {
     dispatch(checkAsync())
