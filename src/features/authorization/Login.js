@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import {
   loginAsync,
   login2Async
 } from './authorizationSlice';
+import { Button, Input, Space, Row, Col, Layout } from 'antd';
+const { Header} = Layout;
 
 function Login () {
   const loggedIn = useSelector(state => state.authorization.loggedIn);
@@ -18,29 +21,31 @@ function Login () {
   }
   else{
     return (
-      <div>
-        <h1>
-          Login
-        </h1>
-            <label>
-              <input placeholder="Username" type="text" name="name" onChange={e => setName(e.target.value)} />
-            </label>
-            <br/>
-            <label>
-              <input placeholder="Password" type="text" name="password" onChange={e => setPassword(e.target.value)}/>
-            </label>
-            <br/>
-            <button onClick={e => dispatch(loginAsync(name, password))}>
-              Login
-            </button>
-            <button onClick={e => dispatch(login2Async())}>
-              Login Fb
-            </button>
-            <br/>
-            <Link to="/Create" style={{fontSize:15}}>
-              Create new account
-            </Link>
-        </div>
+      <div style={{textAlign:"center"}}>
+        <Row sgutter={[16, 16]}>
+          <Col span={6} offset={9}>
+          <Header style={{backgroundColor:"#F0F2F5", fontSize:30}}>Login</Header>
+          <Input placeholder="Username" type="text" name="name" onChange={e => setName(e.target.value)}/>
+        <Input.Password
+          placeholder="input password"
+          iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+          onChange={e => setPassword(e.target.value)}
+        />
+        <Space size={10}>
+          <Button type="primary" onClick={e => dispatch(loginAsync(name, password))}>
+            Login
+          </Button>
+          <Button type="default" onClick={e => dispatch(login2Async())}>
+            Login Fb
+          </Button>
+        </Space>
+        <br/>
+        <Link to="/Create" style={{fontSize:15}}>
+          Create new account
+        </Link>
+          </Col>
+        </Row>
+      </div>
   );
   }
 }

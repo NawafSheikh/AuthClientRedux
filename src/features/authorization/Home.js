@@ -7,6 +7,9 @@ import {
 import {
   fetchDataAsync
 } from '../data/dataSlice';
+import { Layout } from 'antd';
+
+const { Footer, Content } = Layout;
 
 function Home (){
   const name = useSelector(state => state.authorization.name);
@@ -22,12 +25,12 @@ function Home (){
     dispatch(fetchDataAsync())
     return <p>Loading Data........</p>
   }
-  return (<div>
-      <h1>{name} Data</h1>
-      <br />
-      <Data />
+  return (
+    <div>
+      <Content><Data /></Content>
+      <Footer style={{textAlign:"center"}}>Simple Data App</Footer>
     </div>
-    )
+  )
 }
 
 export default Home;

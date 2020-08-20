@@ -14,9 +14,9 @@ export const dataSlice = createSlice({
 
 export const fetchDataAsync = () => dispatch => {
   axios.get('/users/data').then(res => {
-    const upData = res.data.map(d => {return {key:d._id, class:d.class, subject: d.subject, marks:d.marks}})
-    dispatch(dataSlice.actions.store(upData))
+    dispatch(dataSlice.actions.store(res.data))
   }).catch(err => {
+    window.location.reload(false)
     console.log(err)
   })
 }
@@ -39,8 +39,8 @@ export const deleteDataAsync = (id) => dispatch => {
   })
 }
 
-export const updateDataAsync = () => dispatch => (row) => {
-  axios.patch('users/data', {id: row.key, class: row.class, subject: row.subject, marks: row.marks}).then(res => {
+export const updateDataAsync = (id, classValue, subject, marks) => dispatch => {
+  axios.patch('users/data', {id: id, class: classValue, subject: subject, marks: marks}).then(res => {
     dispatch(fetchDataAsync())
   }).catch(err => {
     window.location.reload(false)
